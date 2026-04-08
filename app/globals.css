@@ -2,16 +2,36 @@
 @import "tailwindcss";
 
 :root {
+  /* Core Colors */
   --primary: #25D366;
   --primary-dark: #128C7E;
   --bg: #030712;
-  --card-bg: rgba(17, 24, 39, 0.6);
+  --card-bg: rgba(17, 24, 39, 0.4);
   --text-main: #f9fafb;
   --text-dim: #9ca3af;
   --accent: #38bdf8;
   --glass-border: rgba(255, 255, 255, 0.08);
   --danger: #ef4444;
   --success: #22c55e;
+
+  /* 8px Spacing Scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+
+  /* Geometry */
+  --h-lg: 64px;
+  --h-md: 48px;
+  --h-sm: 32px;
+  
+  --r-2xl: 32px;
+  --r-xl: 24px;
+  --r-lg: 16px;
+  --r-md: 12px;
 }
 
 @theme inline {
@@ -26,29 +46,14 @@
   --color-danger: var(--danger);
   --color-success: var(--success);
   --font-sans: 'Outfit', sans-serif;
-  
-  /* 8px Grid Spacing Scale */
-  --spacing-1: 8px;
-  --spacing-2: 16px;
-  --spacing-3: 24px;
-  --spacing-4: 32px;
-  --spacing-6: 48px;
-  --spacing-8: 64px;
-  --spacing-10: 80px;
-  --spacing-12: 96px;
 
-  /* Component Heights */
-  --h-input: 64px;
-  --h-button: 64px;
-  --h-header: 80px;
-
-  /* Modern Rounding System (8px aligned) */
-  --radius-xs: 8px;
-  --radius-sm: 16px;
-  --radius-md: 24px;
-  --radius-lg: 32px;
-  --radius-xl: 40px;
-  --radius-2xl: 48px;
+  /* Mapping tokens for easy Tailwind usage */
+  --spacing-scale-1: var(--s-1);
+  --spacing-scale-2: var(--s-2);
+  --spacing-scale-4: var(--s-4);
+  --spacing-scale-6: var(--s-6);
+  --spacing-scale-8: var(--s-8);
+  --spacing-scale-12: var(--s-12);
 }
 
 * {
@@ -60,33 +65,24 @@
 body {
   background-color: var(--bg);
   background-image: 
-    radial-gradient(circle at 0% 0%, rgba(37, 211, 102, 0.07) 0%, transparent 35%),
-    radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.07) 0%, transparent 35%),
-    radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 1) 0%, transparent 100%);
+    radial-gradient(circle at 0% 0%, rgba(37, 211, 102, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1) 0%, transparent 100%);
   color: var(--text-main);
   min-height: 100vh;
   font-family: 'Outfit', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Advanced Glassmorphism Container */
+/* Base UI Styles */
 .glass {
   background: var(--card-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
   box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 8px 32px 0 rgba(0, 0, 0, 0.4),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .text-gradient {
@@ -94,35 +90,11 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  box-shadow: 0 4px 15px -3px rgba(37, 211, 102, 0.4);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5);
-  filter: brightness(1.1);
-}
-
-/* Input Styles */
-input, select {
-  background: rgba(0, 0, 0, 0.2) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: white !important;
-}
-
-input:focus, select:focus {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.1) !important;
-  outline: none;
-}
-
-/* Custom Scrollbar */
+/* Scrollbar Refinement */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;

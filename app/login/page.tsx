@@ -3,8 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { LogIn, User, Lock, RefreshCw, AlertCircle } from 'lucide-react';
+import { LogIn, User, Lock } from 'lucide-react';
 import Link from 'next/link';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -29,123 +33,100 @@ export default function LoginPage() {
       if (data.success) {
         router.push('/dashboard');
       } else {
-        setError(data.error || 'Login failed');
+        setError(data.error || 'Identity Verification Failed');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('An internal communication error occurred');
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-8 relative overflow-hidden bg-bg">
-      {/* Dynamic Background Elements */}
+    <div className="min-h-screen flex items-center justify-center p-spacing-scale-4 relative bg-bg selection:bg-primary/30">
+      {/* Background Ambience */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+      
       <motion.div 
-        animate={{ scale: [1, 1.2, 1], x: [0, 80, 0], y: [0, 48, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10"
-      />
-      <motion.div 
-        animate={{ scale: [1, 1.25, 1], x: [0, -80, 0], y: [0, -48, 0] }}
-        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10"
-      />
-
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.98, y: 16 }}
+        initial={{ opacity: 0, scale: 0.98, y: 32 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="glass w-full max-w-[480px] p-10 md:p-12 rounded-[40px] shadow-2xl relative flex flex-col items-center"
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-[480px] z-10"
       >
-        <div className="text-center w-full mb-10">
-          <motion.div
-            initial={{ y: -16, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 mx-auto mb-8 shadow-2xl shadow-primary/10"
-          >
-            <LogIn className="w-8 h-8 text-primary" />
-          </motion.div>
-          
-          <h2 className="text-accent font-black tracking-[.4em] text-[10px] uppercase mb-2 leading-none">SEO Kampany</h2>
-          <h1 className="text-4xl font-black text-gradient tracking-tight leading-none mb-4">Welcome</h1>
-          <p className="text-text-dim text-sm font-medium opacity-60 leading-relaxed">Authentication required for system access</p>
-        </div>
-
-        {error && (
-          <motion.div 
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="w-full bg-danger/10 border border-danger/20 text-danger text-xs font-bold p-4 rounded-xl mb-8 flex items-center gap-3"
-          >
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-            <span className="leading-none">{error}</span>
-          </motion.div>
-        )}
-
-        <form onSubmit={handleLogin} className="w-full space-y-6">
-          <div className="space-y-3">
-            <label className="text-[10px] font-black text-text-dim uppercase tracking-[.25em] ml-1 leading-none block">Username Reference</label>
-            <div className="relative group">
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-primary scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left z-10" />
-              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-primary transition-colors flex items-center justify-center">
-                <User className="w-4 h-4" />
-              </div>
-              <input
-                type="text"
-                placeholder="Enter username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-black/40 border border-white/5 rounded-2xl h-16 pl-12 pr-5 focus:outline-none transition-all font-bold text-base tracking-tight text-white shadow-inner"
-                required
-              />
+        <Card 
+          header={
+            <div className="text-center w-full">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 mx-auto mb-spacing-scale-8 shadow-2xl shadow-primary/10"
+              >
+                <LogIn className="w-8 h-8 text-primary" />
+              </motion.div>
+              <h2 className="text-accent font-black tracking-[.6em] text-[10px] uppercase mb-spacing-scale-2">Auth Command</h2>
+              <h1 className="text-5xl font-black text-gradient tracking-tighter leading-none mb-spacing-scale-4">Log In</h1>
+              <p className="text-text-dim text-sm font-medium opacity-50">Enterprise Access Terminal</p>
             </div>
-          </div>
-          
-          <div className="space-y-3">
-            <label className="text-[10px] font-black text-text-dim uppercase tracking-[.25em] ml-1 leading-none block">Secure Passkey</label>
-            <div className="relative group">
-              <div className="absolute inset-x-0 bottom-0 h-0.5 bg-primary scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left z-10" />
-              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-primary transition-colors flex items-center justify-center">
-                <Lock className="w-4 h-4" />
-              </div>
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/40 border border-white/5 rounded-2xl h-16 pl-12 pr-5 focus:outline-none transition-all font-bold text-base tracking-tight text-white shadow-inner"
-                required
-              />
-            </div>
-          </div>
+          }
+        >
+          {error && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              className="bg-danger/10 border border-danger/20 text-danger text-[11px] font-black uppercase tracking-widest p-spacing-scale-4 rounded-2xl mb-spacing-scale-8 flex items-center gap-3"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-danger animate-pulse" />
+              {error}
+            </motion.div>
+          )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full h-16 btn-primary rounded-2xl font-black text-white hover:scale-[1.01] active:scale-95 transition-all shadow-2xl shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-3 uppercase tracking-widest text-[11px] mt-8"
-          >
-            {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : (
-              <>
-                <LogIn className="w-4 h-4" />
-                Auth Session
-              </>
-            )}
-          </button>
-        </form>
+          <form onSubmit={handleLogin} className="space-y-spacing-scale-6">
+            <Input 
+              label="System Reference"
+              id="username"
+              type="text"
+              placeholder="Username"
+              icon={<User className="w-4 h-4" />}
+              value={username}
+              onChange={(e: any) => setUsername(e.target.value)}
+              required
+            />
+            
+            <Input 
+              label="Encryption Key"
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              icon={<Lock className="w-4 h-4" />}
+              value={password}
+              onChange={(e: any) => setPassword(e.target.value)}
+              required
+            />
 
-        <div className="text-center mt-10">
-          <p className="text-[11px] font-bold text-text-dim opacity-50 flex items-center gap-2 leading-none">
-            New system user? 
-            <Link href="/register" className="text-primary hover:text-accent transition-colors underline underline-offset-4">Secure Registration</Link>
-          </p>
-        </div>
+            <Button 
+              type="submit" 
+              isLoading={loading} 
+              className="w-full mt-spacing-scale-4"
+              rightIcon={<LogIn />}
+            >
+              Initialize Session
+            </Button>
+          </form>
+
+          <div className="text-center mt-spacing-scale-8">
+            <p className="text-[11px] font-bold text-text-dim opacity-50">
+              Identity Missing? 
+              <Link href="/register" className="text-primary hover:text-accent transition-colors ml-2 underline underline-offset-4 decoration-primary/20">Secure Provisioning</Link>
+            </p>
+          </div>
+        </Card>
       </motion.div>
 
-      {/* Footer System Branding */}
-      <div className="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
-        <p className="text-[9px] font-black uppercase tracking-[.8em] text-text-dim opacity-20">Security Deployment Node • SEO Kampany v2.2.8</p>
+      {/* Static System Trace */}
+      <div className="absolute bottom-spacing-scale-8 inset-x-0 text-center pointer-events-none opacity-20">
+        <Badge variant="ghost">Security Cluster Zone • Node v2.2.8 Alpha</Badge>
       </div>
     </div>
   );
