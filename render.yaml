@@ -1,9 +1,12 @@
 services:
   - type: web
-    name: bot-wa
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python -m gunicorn app:app
+    name: bot-wa-nextjs
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: NEXT_PUBLIC_BASE_URL
+        value: https://bot-wa-nextjs.onrender.com # Change this to your actual Render URL

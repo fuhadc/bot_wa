@@ -1,0 +1,21 @@
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Data (IMPORTANT: Do not push user credentials or logs)
+logs.json
+vendors.json
+users.json
+
+# macOS
+.DS_Store
+
+# Antigravity artifacts
+.gemini/
