@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Kampany | WhatsApp Review Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #38bdf8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(37, 211, 102, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #25D366, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+        p.subtitle {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        select option {
+            background-color: var(--bg);
+            color: var(--text-main);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.15);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(37, 211, 102, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+            margin-top: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(37, 211, 102, 0.1);
+            color: white;
+            border-color: white;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            width: auto;
+            box-shadow: none;
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .logs-list, .vendor-list {
+            list-style: none;
+            overflow-y: auto;
+            max-height: 250px;
+            padding-right: 0.5rem;
+        }
+
+        .logs-list::-webkit-scrollbar, .vendor-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .logs-list::-webkit-scrollbar-thumb, .vendor-list::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 10px;
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .list-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .item-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .item-info p {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .status-opened { background: rgba(37, 211, 102, 0.1); color: var(--primary); }
+        .status-failed { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div style="position: absolute; top: 1.5rem; right: 2rem; display: flex; align-items: center; gap: 1rem; z-index: 10;">
+        <span style="font-size: 0.9rem; color: var(--text-dim);">Logged in as <strong>{{ username }}</strong></span>
+        <a href="/logout" class="btn btn-danger" style="text-decoration: none; padding: 0.5rem 1rem;">Logout</a>
+    </div>
+    <div class="container">
+        <!-- Left Column: Form -->
+        <div class="card">
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 1.5rem; margin-bottom: 0;">SEO Kampany</h1>
+                <p style="font-size: 0.8rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Review Request Tool</p>
+            </div>
+            <h1>Request Review</h1>
+            <p class="subtitle">Generate a WhatsApp link with customer details.</p>
+            
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="vendorSelect">Select Vendor</label>
+                    <select id="vendorSelect">
+                        {% for vendor in vendors %}
+                        <option value="{{ vendor.id }}" data-name="{{ vendor.name }}" data-link="{{ vendor.maps_link }}">
+                            {{ vendor.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Customer Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number (with code)</label>
+                    <input type="text" id="phone" placeholder="919876543210" required>
+                </div>
+
+                <!-- Hidden inputs to send vendor details -->
+                <input type="hidden" id="vendorName" value="">
+                <input type="hidden" id="mapsLink" value="">
+                
+                <button type="submit" class="btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Generate WhatsApp Link
+                </button>
+
+                <button type="button" class="btn btn-outline" onclick="toggleModal('vendorModal')">
+                    Manage Vendors
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Column: Activity and Mini Vendor List -->
+        <div class="right-column">
+            <div class="card">
+                <h2>Recent Activity</h2>
+                <ul class="logs-list">
+                    {% for log in logs %}
+                    <li class="list-item">
+                        <div class="item-info">
+                            <h4>{{ log.name }}</h4>
+                            <p>{{ log.vendor }} • {{ log.phone }}</p>
+                        </div>
+                        <span class="status-badge status-{{ log.status }}">{{ log.status }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Quick Config</h2>
+                <p class="subtitle" id="currentConfigDisplay">Select a vendor to see config.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Management Modal -->
+    <div id="vendorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal('vendorModal')">&times;</span>
+            <h2>Manage Vendors</h2>
+            
+            <form id="addVendorForm" style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border);">
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" id="newVendorName" placeholder="e.g. Binateeq Curtain" required>
+                </div>
+                <div class="form-group">
+                    <label>Google Maps Review Link</label>
+                    <input type="text" id="newVendorLink" placeholder="https://g.page/r/..." required>
+                </div>
+                <button type="submit" class="btn">Add Vendor</button>
+            </form>
+
+            <ul class="vendor-list" id="modalVendorList">
+                {% for vendor in vendors %}
+                <li class="list-item" id="v-{{ vendor.id }}">
+                    <div class="item-info">
+                        <h4>{{ vendor.name }}</h4>
+                        <p>{{ vendor.maps_link }}</p>
+                    </div>
+                    <button class="btn-danger" onclick="deleteVendor('{{ vendor.id }}')">Delete</button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const vendorSelect = document.getElementById('vendorSelect');
+        const vendorNameInput = document.getElementById('vendorName');
+        const mapsLinkInput = document.getElementById('mapsLink');
+        const configDisplay = document.getElementById('currentConfigDisplay');
+
+        function updateConfig() {
+            const selected = vendorSelect.options[vendorSelect.selectedIndex];
+            if (selected) {
+                vendorNameInput.value = selected.getAttribute('data-name');
+                mapsLinkInput.value = selected.getAttribute('data-link');
+                configDisplay.innerHTML = `<strong>Vendor:</strong> ${vendorNameInput.value}<br><strong>Link:</strong> <span style="font-size: 0.8rem; color: var(--accent);">${mapsLinkInput.value}</span>`;
+            }
+        }
+
+        vendorSelect.addEventListener('change', updateConfig);
+        updateConfig(); // Initial load
+
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Handle generation
+        document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Generating...';
+            btn.disabled = true;
+
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                vendor: vendorNameInput.value,
+                maps_link: mapsLinkInput.value
+            };
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.status === 401) {
+                    const result = await response.json();
+                    window.location.href = result.redirect || '/login';
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    window.open(result.wa_link, '_blank');
+                    location.reload();
+                } else { alert('Error: ' + result.error); }
+            } catch (error) { 
+                console.error(error);
+                alert('An error occurred. Your session might have expired. Please refresh.'); 
+            }
+            finally { btn.innerHTML = originalText; btn.disabled = false; }
+        });
+
+        // Handle Add Vendor
+        document.getElementById('addVendorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('newVendorName').value,
+                maps_link: document.getElementById('newVendorLink').value
+            };
+
+            try {
+                const response = await fetch('/vendors', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.status === 401) {
+                    const result = await response.json();
+                    window.location.href = result.redirect || '/login';
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    location.reload(); 
+                }
+            } catch (error) { 
+                console.error(error);
+                alert('Error adding vendor. Your session might have expired.'); 
+            }
+        });
+
+        // Handle Delete Vendor
+        async function deleteVendor(id) {
+            if (!confirm('Are you sure you want to delete this vendor?')) return;
+            try {
+                const response = await fetch(`/vendors/${id}`, { 
+                    method: 'DELETE',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                if (response.status === 401) {
+                    const result = await response.json();
+                    window.location.href = result.redirect || '/login';
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById(`v-${id}`).remove();
+                    const option = vendorSelect.querySelector(`option[value="${id}"]`);
+                    if (option) option.remove();
+                    updateConfig();
+                }
+            } catch (error) { 
+                console.error(error);
+                alert('Error deleting vendor.'); 
+            }
+        }
+    </script>
+</body>
+</html>
