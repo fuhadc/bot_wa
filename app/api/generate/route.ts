@@ -19,11 +19,11 @@ export async function POST(request: Request) {
       const message = generateMessage(name, vendor, maps_link);
       const waLink = generateWaLink(phone, message);
       
-      saveLog(username, phone, name, vendor, 'opened');
+      await saveLog(username, phone, name, vendor, 'opened');
       
       return NextResponse.json({ success: true, wa_link: waLink });
     } catch (err) {
-      saveLog(username, phone, name, vendor, 'failed');
+      await saveLog(username, phone, name, vendor, 'failed');
       throw err;
     }
   } catch (error) {

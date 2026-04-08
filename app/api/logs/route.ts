@@ -7,8 +7,6 @@ export async function GET() {
   const username = cookieStore.get('session_user')?.value;
   if (!username) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   
-  const logs = getLogs(username);
-  // Sort by timestamp newest first
-  const sortedLogs = logs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-  return NextResponse.json({ logs: sortedLogs });
+  const logs = await getLogs(username);
+  return NextResponse.json({ logs });
 }
