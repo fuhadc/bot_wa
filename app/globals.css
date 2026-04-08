@@ -27,12 +27,27 @@
   --color-success: var(--success);
   --font-sans: 'Outfit', sans-serif;
   
-  /* Modern Rounding System */
+  /* 8px Grid Spacing Scale */
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-6: 48px;
+  --spacing-8: 64px;
+  --spacing-10: 80px;
+  --spacing-12: 96px;
+
+  /* Component Heights */
+  --h-input: 64px;
+  --h-button: 64px;
+  --h-header: 80px;
+
+  /* Modern Rounding System (8px aligned) */
   --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --radius-xl: 40px;
   --radius-2xl: 48px;
 }
 
