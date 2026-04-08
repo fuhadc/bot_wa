@@ -127,5 +127,7 @@ def generate():
         return jsonify({"success": False, "error": str(e)}), 500
 
 if __name__ == '__main__':
-    print("🚀 WhatsApp Review Tool starting at http://127.0.0.1:5000")
-    app.run(debug=True, port=5000)
+    # Listen on 0.0.0.0 and use the PORT environment variable provided by Render
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🚀 WhatsApp Review Tool starting at http://0.0.0.0:{port}")
+    app.run(host="0.0.0.0", port=port, debug=False)
