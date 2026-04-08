@@ -42,48 +42,48 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-bg">
+    <div className="min-h-screen flex items-center justify-center p-8 relative overflow-hidden bg-bg">
       {/* Dynamic Background Elements */}
       <motion.div 
-        animate={{ scale: [1, 1.2, 1], x: [0, -100, 0], y: [0, 50, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        animate={{ scale: [1, 1.2, 1], x: [0, -80, 0], y: [0, 48, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10"
       />
       <motion.div 
-        animate={{ scale: [1, 1.3, 1], x: [0, 100, 0], y: [0, -50, 0] }}
+        animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, -48, 0] }}
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
         className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10"
       />
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        initial={{ opacity: 0, scale: 0.98, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="glass w-full max-w-[500px] p-12 md:p-14 rounded-[48px] shadow-2xl relative"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="glass w-full max-w-[480px] p-10 md:p-12 rounded-[40px] shadow-2xl relative flex flex-col items-center"
       >
-        <div className="text-center mb-12">
+        <div className="text-center w-full mb-10">
           <motion.div
-            initial={{ y: -20, opacity: 0 }}
+            initial={{ y: -16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="w-20 h-20 bg-accent/10 rounded-3xl flex items-center justify-center border border-accent/20 mx-auto mb-8 shadow-2xl shadow-accent/10"
+            transition={{ delay: 0.2 }}
+            className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center border border-accent/20 mx-auto mb-8 shadow-2xl shadow-accent/10"
           >
-            <UserPlus className="w-10 h-10 text-accent" />
+            <UserPlus className="w-8 h-8 text-accent" />
           </motion.div>
           
-          <h2 className="text-primary font-black tracking-[.4em] text-[11px] uppercase mb-2">SEO Kampany</h2>
-          <h1 className="text-5xl font-black text-gradient tracking-tighter">Sign Up</h1>
-          <p className="text-text-dim text-base mt-4 font-medium opacity-80">Provisioning your enterprise access</p>
+          <h2 className="text-primary font-black tracking-[.4em] text-[10px] uppercase mb-2 leading-none">SEO Kampany</h2>
+          <h1 className="text-4xl font-black text-gradient tracking-tight leading-none mb-4">Sign Up</h1>
+          <p className="text-text-dim text-sm font-medium opacity-60 leading-relaxed">Provisioning new enterprise identity access</p>
         </div>
 
         {error && (
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-danger/10 border border-danger/20 text-danger text-sm font-bold p-5 rounded-2xl mb-10 flex items-center gap-4"
+            className="w-full bg-danger/10 border border-danger/20 text-danger text-xs font-bold p-4 rounded-xl mb-8 flex items-center gap-3"
           >
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
-            {error}
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="leading-none">{error}</span>
           </motion.div>
         )}
 
@@ -91,45 +91,45 @@ export default function RegisterPage() {
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="bg-primary/10 border border-primary/20 text-primary text-sm font-bold p-5 rounded-2xl mb-10 flex items-center gap-4"
+            className="w-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold p-4 rounded-xl mb-8 flex items-center gap-3"
           >
-            <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            {message}
+            <CheckCircle className="w-4 h-4 flex-shrink-0" />
+            <span className="leading-none">{message}</span>
           </motion.div>
         )}
 
-        <form onSubmit={handleRegister} className="space-y-8">
-          <div className="space-y-4">
-            <label className="text-[11px] font-black text-text-dim uppercase tracking-[.3em] ml-1">Identity Reference</label>
+        <form onSubmit={handleRegister} className="w-full space-y-6">
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-text-dim uppercase tracking-[.25em] ml-1 leading-none block">Identity Reference</label>
             <div className="relative group">
               <div className="absolute inset-x-0 bottom-0 h-0.5 bg-accent scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left z-10" />
-              <div className="absolute left-6 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-accent transition-colors">
-                <User className="w-5 h-5" />
+              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-accent transition-colors flex items-center justify-center">
+                <User className="w-4 h-4" />
               </div>
               <input
                 type="text"
                 placeholder="Ex. brandmanager"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-black/50 border border-white/5 rounded-2xl h-[72px] pl-14 pr-6 focus:outline-none transition-all font-bold text-lg tracking-tight text-white shadow-inner"
+                className="w-full bg-black/40 border border-white/5 rounded-2xl h-16 pl-12 pr-5 focus:outline-none transition-all font-bold text-base tracking-tight text-white shadow-inner"
                 required
               />
             </div>
           </div>
           
-          <div className="space-y-4">
-            <label className="text-[11px] font-black text-text-dim uppercase tracking-[.3em] ml-1">Secure Encryption Key</label>
+          <div className="space-y-3">
+            <label className="text-[10px] font-black text-text-dim uppercase tracking-[.25em] ml-1 leading-none block">Secure Encryption Key</label>
             <div className="relative group">
               <div className="absolute inset-x-0 bottom-0 h-0.5 bg-accent scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500 origin-left z-10" />
-              <div className="absolute left-6 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-accent transition-colors">
-                <Lock className="w-5 h-5" />
+              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-accent transition-colors flex items-center justify-center">
+                <Lock className="w-4 h-4" />
               </div>
               <input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/50 border border-white/5 rounded-2xl h-[72px] pl-14 pr-6 focus:outline-none transition-all font-bold text-lg tracking-tight text-white shadow-inner"
+                className="w-full bg-black/40 border border-white/5 rounded-2xl h-16 pl-12 pr-5 focus:outline-none transition-all font-bold text-base tracking-tight text-white shadow-inner"
                 required
               />
             </div>
@@ -138,21 +138,29 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-[72px] bg-gradient-to-br from-accent to-blue-600 rounded-2xl font-black text-white hover:scale-[1.02] active:scale-95 transition-all shadow-2xl shadow-accent/30 disabled:opacity-50 flex items-center justify-center gap-4 uppercase tracking-[.25em] text-sm mt-6"
+            className="w-full h-16 bg-gradient-to-br from-accent to-blue-600 rounded-2xl font-black text-white hover:scale-[1.01] active:scale-95 transition-all shadow-2xl shadow-accent/20 disabled:opacity-50 flex items-center justify-center gap-3 uppercase tracking-widest text-[11px] mt-8"
           >
-            {loading ? <RefreshCw className="w-6 h-6 animate-spin" /> : (
+            {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : (
               <>
-                <UserPlus className="w-5 h-5" />
+                <UserPlus className="w-4 h-4" />
                 Initialize Identity
               </>
             )}
           </button>
         </form>
 
-        <p className="text-center mt-12 text-sm font-bold text-text-dim opacity-70">
-          Already verified? <Link href="/login" className="text-accent hover:text-blue-400 ml-1 transition-colors">Access Session</Link>
-        </p>
+        <div className="text-center mt-10">
+          <p className="text-[11px] font-bold text-text-dim opacity-50 flex items-center gap-2 leading-none">
+            Already verified? 
+            <Link href="/login" className="text-accent hover:text-blue-400 transition-colors underline underline-offset-4">Access Session</Link>
+          </p>
+        </div>
       </motion.div>
+
+      {/* Footer System Branding */}
+      <div className="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
+        <p className="text-[9px] font-black uppercase tracking-[.8em] text-text-dim opacity-20">Security Deployment Node • SEO Kampany v2.2.8</p>
+      </div>
     </div>
   );
 }
