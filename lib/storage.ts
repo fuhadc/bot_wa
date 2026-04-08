@@ -45,7 +45,14 @@ initStorage();
 // --- User Management ---
 
 export async function addUser(username: string, password: string): Promise<{ success: boolean; message: string }> {
-  const users: User[] = JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
+  const usersJson = fs.readFileSync(USERS_FILE, 'utf-8');
+  let users: any[] = [];
+  try {
+    users = JSON.parse(usersJson);
+    if (!Array.isArray(users)) users = [];
+  } catch (e) {
+    users = [];
+  }
   
   if (users.find(u => u.username === username)) {
     return { success: false, message: "Username already exists" };
@@ -58,11 +65,33 @@ export async function addUser(username: string, password: string): Promise<{ suc
 }
 
 export async function verifyUser(username: string, password: string): Promise<User | null> {
-  const users: User[] = JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
+  const usersJson = fs.readFileSync(USERS_FILE, 'utf-8');
+  let users: any[] = [];
+  try {
+    users = JSON.parse(usersJson);
+    if (!Array.isArray(users)) users = [];
+  } catch (e) {
+    users = [];
+  }
+
   const user = users.find(u => u.username === username);
   
-  if (user && await bcrypt.compare(password, user.passwordHash)) {
-    return user;
+  if (user) {
+    // Handle both legacy and new field names
+    const hash = user.passwordHash || user.password_hash;
+    if (!hash) return null;
+
+    // Check if it's a bcrypt hash
+    if (hash.startsWith('$2b$')) {
+      if (await bcrypt.compare(password, hash)) {
+        return user as User;
+      }
+    } else {
+      // It's a legacy Python hash (scrypt), we can't easily verify it here
+      // To be safe, we'll return null and expect the user to re-register
+      // or we can implement a legacy check later.
+      return null;
+    }
   }
   return null;
 }
@@ -70,12 +99,23 @@ export async function verifyUser(username: string, password: string): Promise<Us
 // --- Vendor Management ---
 
 export function getVendors(username: string): Vendor[] {
-  const vendors: Vendor[] = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
-  return vendors.filter(v => v.username === username);
+  try {
+    const vendors: Vendor[] = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
+    return Array.isArray(vendors) ? vendors.filter(v => v.username === username) : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 export function addVendor(username: string, name: string, maps_link: string): Vendor {
-  const vendors: Vendor[] = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
+  let vendors: Vendor[] = [];
+  try {
+    vendors = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
+    if (!Array.isArray(vendors)) vendors = [];
+  } catch (e) {
+    vendors = [];
+  }
+
   const newVendor: Vendor = {
     id: Math.random().toString(36).substring(2, 9),
     username,
@@ -88,20 +128,36 @@ export function addVendor(username: string, name: string, maps_link: string): Ve
 }
 
 export function deleteVendor(username: string, vendorId: string): void {
-  const vendors: Vendor[] = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
-  const filtered = vendors.filter(v => !(v.id === vendorId && v.username === username));
-  fs.writeFileSync(VENDORS_FILE, JSON.stringify(filtered, null, 2));
+  try {
+    const vendors: Vendor[] = JSON.parse(fs.readFileSync(VENDORS_FILE, 'utf-8'));
+    if (!Array.isArray(vendors)) return;
+    const filtered = vendors.filter(v => !(v.id === vendorId && v.username === username));
+    fs.writeFileSync(VENDORS_FILE, JSON.stringify(filtered, null, 2));
+  } catch (e) {
+    // Ignore errors
+  }
 }
 
 // --- Logging ---
 
 export function getLogs(username: string): ActivityLog[] {
-  const logs: ActivityLog[] = JSON.parse(fs.readFileSync(LOGS_FILE, 'utf-8'));
-  return logs.filter(l => l.username === username);
+  try {
+    const logs: ActivityLog[] = JSON.parse(fs.readFileSync(LOGS_FILE, 'utf-8'));
+    return Array.isArray(logs) ? logs.filter(l => l.username === username) : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 export function saveLog(username: string, phone: string, name: string, vendor: string, status: 'opened' | 'failed'): ActivityLog {
-  const logs: ActivityLog[] = JSON.parse(fs.readFileSync(LOGS_FILE, 'utf-8'));
+  let logs: ActivityLog[] = [];
+  try {
+    logs = JSON.parse(fs.readFileSync(LOGS_FILE, 'utf-8'));
+    if (!Array.isArray(logs)) logs = [];
+  } catch (e) {
+    logs = [];
+  }
+
   const newLog: ActivityLog = {
     id: Math.random().toString(36).substring(2, 9),
     username,

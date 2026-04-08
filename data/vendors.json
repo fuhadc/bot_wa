@@ -1,10 +1,8 @@
-{
-  "vendors": [
-    {
-      "id": "v1_1775661578",
-      "username": "123",
-      "name": "work",
-      "maps_link": "https://maps.app.goo.gl/18jwJvVtbSqFRY8k9"
-    }
-  ]
-}
+[
+  {
+    "id": "v1_1775661578",
+    "username": "123",
+    "name": "work",
+    "maps_link": "https://maps.app.goo.gl/18jwJvVtbSqFRY8k9"
+  }
+]

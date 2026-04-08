@@ -1,19 +1,17 @@
-{
-  "logs": [
-    {
-      "phone": "+919747922261",
-      "name": "fuhad",
-      "vendor": "fhdsbhjbdf",
-      "status": "opened",
-      "timestamp": "2026-04-08T19:20:51.777674"
-    },
-    {
-      "username": "123",
-      "phone": "+919747922261",
-      "name": "ytfugykh",
-      "vendor": "work",
-      "status": "opened",
-      "timestamp": "2026-04-08T20:50:53.678260"
-    }
-  ]
-}
+[
+  {
+    "phone": "+919747922261",
+    "name": "fuhad",
+    "vendor": "fhdsbhjbdf",
+    "status": "opened",
+    "timestamp": "2026-04-08T19:20:51.777674"
+  },
+  {
+    "username": "123",
+    "phone": "+919747922261",
+    "name": "ytfugykh",
+    "vendor": "work",
+    "status": "opened",
+    "timestamp": "2026-04-08T20:50:53.678260"
+  }
+]

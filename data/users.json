@@ -1,8 +1,10 @@
-{
-  "users": [
-    {
-      "username": "123",
-      "password_hash": "scrypt:32768:8:1$fWVSCB70pCLmHCo3$8aae1fb64fbb14d53f4b62ae2e2d339b482839af8ba9d4d3232cafe5bb302a4fa1c4d924b83c96ca84efdbda2fd6784eb09e768edc055d2a6b7418c3e27b8647"
-    }
-  ]
-}
+[
+  {
+    "username": "123",
+    "password_hash": "scrypt:32768:8:1$fWVSCB70pCLmHCo3$8aae1fb64fbb14d53f4b62ae2e2d339b482839af8ba9d4d3232cafe5bb302a4fa1c4d924b83c96ca84efdbda2fd6784eb09e768edc055d2a6b7418c3e27b8647"
+  },
+  {
+    "username": "12345",
+    "passwordHash": "$2b$10$A.OcjybHoyrY10AAsrF9xOGXnZZwuS172epEauHanOLvoFPPQLxHW"
+  }
+]
